@@ -6,7 +6,7 @@
     kafka_version: '3.7.0'
     scala_version: '2.13'
     kafka_name: 'kafka_{{ scala_version }}-{{ kafka_version }}'
-    kafka_home: '/opt'
+    kafka_home: '/opt/kafka'
 
   tasks:
 
@@ -28,14 +28,16 @@
       unarchive:
         src: '/tmp/{{ kafka_name }}.tgz'
         dest: '{{ kafka_home }}'
+        extra_opts: "--strip-components=1"
 
+# ZooKeeper and Kafka systemd service
 
-    - name: Run ZooKeeper
-      command:
-        chdir: '/opt/{{ kafka_name }}'
-        cmd: ./bin/zookeeper-server-start.sh ./config/zookeeper.properties
-      register: result
+    - name: Create ZooKeeper systemd service file
+      copy:
+        src: kafka-zookeeper.service
+        dest: '/usr/lib/systemd/system/kafka-zookeeper.service'
 
-    - name: Output
-      debug:
-        var: result.stdout
+    - name: Create Kafka systemd service file
+      copy:
+        src: kafka.service
+        dest: '/usr/lib/systemd/system/kafka.service'
