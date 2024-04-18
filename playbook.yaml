@@ -10,6 +10,8 @@
 
   tasks:
 
+# Download and installation
+
     - name: Install Java JRE
       apt:
         name: default-jre
@@ -54,3 +56,10 @@
         name: kafka
         enabled: true
         state: started
+
+# Kafka setup
+
+    - name: Create Kafka Topic
+      command:
+        chdir: '/opt/kafka'
+        cmd: bin/kafka-topics.sh --create --if-not-exists --topic example-topic --bootstrap-server localhost:9092
