@@ -30,14 +30,27 @@
         dest: '{{ kafka_home }}'
         extra_opts: "--strip-components=1"
 
-# ZooKeeper and Kafka systemd service
+# ZooKeeper and Kafka systemd services
 
-    - name: Create ZooKeeper systemd service file
+    - name: Create ZooKeeper Systemd Service
       copy:
         src: kafka-zookeeper.service
         dest: '/usr/lib/systemd/system/kafka-zookeeper.service'
 
-    - name: Create Kafka systemd service file
+    - name: Create Kafka Systemd Service
       copy:
         src: kafka.service
         dest: '/usr/lib/systemd/system/kafka.service'
+
+    - name: Start ZooKeeper Service
+      systemd_service:
+        name: kafka-zookeeper
+        enabled: true
+        state: started
+        daemon-reload: true
+
+    - name: Start Kafka Service
+      systemd_service:
+        name: kafka
+        enabled: true
+        state: started
