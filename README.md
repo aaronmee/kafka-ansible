@@ -11,6 +11,6 @@ ansible-playbook playbook.yaml
 ```
 To test if the installation was successfull, run
 ```bash
-/opt/kafka/bin/kafka-console-consumer.sh --topic example-topic --bootstrap-server localhost:9092
+/opt/kafka/bin/kafka-console-consumer.sh --topic example-topic --from-beginning --bootstrap-server localhost:9092
 ```
 If you can read "Kafka Test Success", you're good to go.
