@@ -9,8 +9,4 @@ Run the playbook (requires root privileges)
 ```bash
 ansible-playbook playbook.yaml
 ```
-To test if the installation was successfull, run
-```bash
-/opt/kafka/bin/kafka-console-consumer.sh --topic example-topic --from-beginning --bootstrap-server localhost:9092
-```
-If you can read "Kafka Test Success", you're good to go.
+If ansible reports "Kafka has been successfully installed", you're good to go.
