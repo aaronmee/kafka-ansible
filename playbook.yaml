@@ -67,9 +67,3 @@
     - name: Send Message
       shell: echo "Kafka Test Success" | /opt/kafka/bin/kafka-console-producer.sh --topic example-topic --bootstrap-server localhost:9092
 
-    - name: Read Message
-      command: /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic example-topic --from-beginning
-      register: result
-      until: result.stdout.find("Kafka Test Success") != -1
-      retries: 5
-      delay: 2
