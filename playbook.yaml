@@ -10,3 +10,6 @@
       ansible.builtin.unarchive:
         src: ./kafka-3.7.0-src.tgz
         dest: ./
+    - name: Install Java JRE
+      ansible.builtin.apt:
+        name: default-jre
